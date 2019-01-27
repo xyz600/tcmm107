@@ -1,0 +1,4 @@
+*.class
+.mypy_cache
+a.out
+result
