@@ -30,7 +30,6 @@ def push_result():
                 if "=" in line:
                     tokens = line.split("=")
                     config[tokens[0].strip()] = tokens[1].strip()
-
         return float(config["Score"])
 
     submit_num = len(glob.glob(result_dir + "/*"))

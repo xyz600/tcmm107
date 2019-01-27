@@ -226,7 +226,7 @@ int PointsOnGrid::markSA(vector<string>& result)
 
             const double diff = calculateScoreDiff(time_rest_rate, counter_in_subgrid, y, x, result);
 
-            if (diff > 0 || rand_prob(mt) <= exp(diff / time_rest_rate))
+            if (diff > 0 || rand_prob(mt) <= exp(diff * time_rest_rate))
             {
                 if (result[y][x] == 'x')
                 {
