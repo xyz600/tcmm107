@@ -50,7 +50,7 @@ def get_raw_score_list():
 def get_score_list(raw_score_list):
 
     def score(raw_score, max_raw_score):
-        return sum(map(lambda x: 0.0 if x[1] == -1.0 else float(x[1]) / x[0], zip(raw_score, max_raw_score))) * 1000000.0 / num_testcase
+        return sum(map(lambda x: 0.0 if x[0] == -1.0 else float(x[0]) / x[1], zip(raw_score, max_raw_score))) * 1000000.0 / num_testcase
 
     max_raw_score = list(map(max, map(list, list(zip(*raw_score_list)))))
 

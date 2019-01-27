@@ -78,6 +78,9 @@ public class PointsOnGridVis {
 
     // -----------------------------------------
     public double runTest(String seed) {
+
+        boolean failed = false;
+
         try {
             generate(seed);
 
@@ -126,14 +129,18 @@ public class PointsOnGridVis {
                                     count++;
 
                         if (count > Kmax) {
-                            addFatalError(
-                                    "Subgrid starting at (" + r1 + "," + c1 + ") contains too many painted cells");
-                            return -1.0;
+                            failed = true;
+                            // addFatalError(
+                            // "Subgrid starting at (" + r1 + "," + c1 + ") contains too many painted
+                            // cells");
+                            // return -1.0;
                         }
                         if (count < Kmin) {
-                            addFatalError(
-                                    "Subgrid starting at (" + r1 + "," + c1 + ") contains not enough painted cells");
-                            return -1.0;
+                            failed = true;
+                            // addFatalError(
+                            // "Subgrid starting at (" + r1 + "," + c1 + ") contains not enough painted
+                            // cells");
+                            // return -1.0;
                         }
                     }
 
@@ -144,6 +151,10 @@ public class PointsOnGridVis {
                     jf.setVisible(true);
                     draw();
                 }
+            }
+            if (failed) {
+                addFatalError("Kmin or Kmax restriction is not met");
+                return -1.0;
             }
 
             return getScore();
