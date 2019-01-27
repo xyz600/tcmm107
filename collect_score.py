@@ -56,18 +56,26 @@ def get_score_list(raw_score_list):
     return [score(raw_score, max_raw_score) for raw_score in raw_score_list]
 
 
-def print_result():
+def get_failcount_list(raw_score_list):
 
-    score_list = get_score_list(get_raw_score_list())
+    return list(map(lambda raw_score: raw_score.count(-1.0), raw_score_list))
+
+
+def print_result():
+    raw_score_list = get_raw_score_list()
+    score_list = get_score_list(raw_score_list)
     score_index = [(score, index) for (index, score) in enumerate(score_list)]
     score_index.sort(reverse=True)
     score_rank_index = [(rank, x[0], x[1])
                         for (rank, x) in enumerate(score_index, start=1)]
 
-    print("| rank | # submit | score |")
-    print("|--|--|--|")
+    fail_count_list = get_failcount_list(raw_score_list)
+
+    print("| rank | # submit | score | fail |")
+    print("|--|--|--|--|")
     for (rank, score, index) in score_rank_index:
-        print("| {} | {} | {} |".format(rank, index, score))
+        print("| {} | {} | {} | {} |".format(
+            rank, index, score, fail_count_list[index]))
 
 
 if __name__ == "__main__":
